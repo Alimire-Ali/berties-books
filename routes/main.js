@@ -41,6 +41,34 @@ module.exports = function(app, shopData) {
           })
 
     }); 
+    app.get('/login', function (req,res) {
+        res.render('login.ejs', shopData);                                                                     
+    });
+    app.post('loggedin', function (req,res) {
+        const bcrypt = require('bcrypt');
+        let sqlquery = "SELECT * FROM registration WHERE username = (?) ";
+        let lgdetails = [req.body.username];
+        db.query(sqlquery,lgdetails, (err, result)=> {
+            if (err){
+                return console.error(err.message);
+            }
+            else {
+                bcrypt.compare(req.body.password, hashedPassword, function(err, result) {
+                    if (err) {
+                      // TODO: Handle error
+                      return console.error(err.message);
+                    }
+                    else if (result == true) {
+                      // TODO: Send message
+                    }
+                    else {
+                      // TODO: Send message
+                    }
+                  }); 
+            }
+        });      
+    })
+    
 
     app.get('/list', function(req, res) {
         let sqlquery = "SELECT * FROM books"; // query database to get all the books
