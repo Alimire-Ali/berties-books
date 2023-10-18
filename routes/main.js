@@ -49,6 +49,7 @@ module.exports = function(app, shopData) {
         let sqlquery = "SELECT hashedPassword FROM registration WHERE username = ? ";
         let lgdetails = [req.body.username];
         db.query(sqlquery,lgdetails, (err, result)=> {
+            console.log(result);
             if (err){
                 return console.error(err.message);
             }
