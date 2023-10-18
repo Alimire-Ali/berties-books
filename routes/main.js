@@ -44,7 +44,7 @@ module.exports = function(app, shopData) {
     app.get('/login', function (req,res) {
         res.render('login.ejs', shopData);                                                                     
     });
-    app.post('loggedin', function (req,res) {
+    app.post('/loggedin', function (req,res) {
         const bcrypt = require('bcrypt');
         let sqlquery = "SELECT * FROM registration WHERE username = (?) ";
         let lgdetails = [req.body.username];
