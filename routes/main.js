@@ -46,7 +46,7 @@ module.exports = function(app, shopData) {
     });
     app.post('/loggedin', function (req,res) {
         const bcrypt = require('bcrypt');
-        let sqlquery = "SELECT * FROM registration WHERE username = (?) ";
+        let sqlquery = "SELECT hashedPassword FROM registration WHERE username = (?) ";
         let lgdetails = [req.body.username];
         db.query(sqlquery,lgdetails, (err, result)=> {
             if (err){
