@@ -29,7 +29,7 @@ module.exports = function(app, shopData) {
 
             let sqlquery = "INSERT INTO registration (first, last, email, username, hashedPassword) VALUES (?,?,?,?,?)";
             // execute sql query
-            let newrecord = [req.body.first, req.body.last, req.body.email, req.body.username, req.body.hashedPassword];
+            let newrecord = [req.body.first, req.body.last, req.body.email, req.body.username, hashedPassword];
             db.query(sqlquery, newrecord, (err, result) => {
                 if (err) {
                 return console.error(err.message);
