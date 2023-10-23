@@ -54,7 +54,7 @@ module.exports = function(app, shopData) {
             if (err){
                 return console.error(err.message);
             }
-            else if (result == true) {
+            else {
                 const bcrypt = require('bcrypt');
                 const plainPassword = req.body.password;
                 bcrypt.compare(plainPassword, hashedPassword, function(err, result) {
@@ -73,9 +73,9 @@ module.exports = function(app, shopData) {
                     }
                   }); 
             }
-            else {
-                res.send('Login not detected, register with us first.')
-            }
+            // else {
+            //     res.send('Login not detected, register with us first.')
+            // }
         });      
     })
     
