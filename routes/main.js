@@ -46,6 +46,7 @@ module.exports = function(app, shopData) {
     });
     app.post('/loggedin', function (req,res) {
         const bcrypt = require('bcrypt');
+        const plainPassword = req.body.password;
         let sqlquery = "SELECT hashedPassword FROM registration WHERE username = ? ";
         let lgdetails = [req.body.username];
         db.query(sqlquery,lgdetails, (err, result)=> {
@@ -54,41 +55,26 @@ module.exports = function(app, shopData) {
                 return console.error(err.message);
             }
             else if (result == true) {
-                // bcrypt.compare(req.body.password, hashedPassword, function(err, result) {
-                //     console.log(result);
-                //     if (err) {
-                //       // TODO: Handle error
-                //       return console.error(err.message);
-                //     }
-                //     else if (result == true) {
-                //       // TODO: Send message
-                //       res.send('You are now Logged in!');
-                //     }
-                //     else {
-                //       // TODO: Send message
-                //       res.send('Incorrect Login!');
-                //     }
-                //   }); 
+                bcrypt.compare(plainPassword, hashedPassword, function(err, result) {
+                    console.log(result);
+                    if (err) {
+                      // TODO: Handle error
+                      return console.error(err.message);
+                    }
+                    else if (result == true) {
+                      // TODO: Send message
+                      res.send('You are now Logged in!');
+                    }
+                    else {
+                      // TODO: Send message
+                      res.send('Incorrect Login!');
+                    }
+                  }); 
             }
             else {
-                res.send('Login not detected, register with us first.');
+                res.send('Login not detected, register with us first.')
             }
-        });   
-            bcrypt.compare(req.body.password, hashedPassword, function(err, result) {
-                console.log(result);
-                if (err) {
-                // TODO: Handle error
-                return console.error(err.message);
-                }
-                else if (result == true) {
-                // TODO: Send message
-                res.send('You are now Logged in!');
-                }
-                else {
-                // TODO: Send message
-                res.send('Incorrect Login!');
-                }
-            });   
+        });      
     })
     
 
