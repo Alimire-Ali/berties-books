@@ -49,13 +49,12 @@ module.exports = function(app, shopData) {
 
         let sqlquery = "SELECT hashedPassword FROM registration WHERE username = ? ";
         let lgdetails = [req.body.username];
-        db.query(sqlquery, lgdetails, (err, result) => {
+        db.query(sqlquery, lgdetails, (err, hashedPassword) => {
             console.log(result);
-            console.log({hashedPassword});
             if (err){
                 return console.error(err.message);
             }
-            else if (result == true) {
+            else {
                 bcrypt.compare(req.body.password, hashedPassword, function(err, result) {
                     console.log(result);
                     if (err) {
@@ -72,11 +71,11 @@ module.exports = function(app, shopData) {
                     }
                   }); 
             }
-            else {
-                res.send('Login not detected, register with us first.')
-            }
+            // else {
+            //     res.send('Login not detected, register with us first.')
+            // }
         });      
-    });
+    })
     
 
     app.get('/list', function(req, res) {
