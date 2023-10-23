@@ -55,6 +55,7 @@ module.exports = function(app, shopData) {
             }
             else if (result == true) {
                 bcrypt.compare(req.body.password, hashedPassword, function(err, result) {
+                    console.log(hashedPassword);
                     if (err) {
                       // TODO: Handle error
                       return console.error(err.message);
@@ -65,6 +66,7 @@ module.exports = function(app, shopData) {
                     }
                     else {
                       // TODO: Send message
+                      res.send('Incorrect Login!');
                     }
                   }); 
             }
