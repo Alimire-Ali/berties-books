@@ -54,26 +54,41 @@ module.exports = function(app, shopData) {
                 return console.error(err.message);
             }
             else if (result == true) {
-                bcrypt.compare(req.body.password, hashedPassword, function(err, result) {
-                    console.log(result);
-                    if (err) {
-                      // TODO: Handle error
-                      return console.error(err.message);
-                    }
-                    else if (result == true) {
-                      // TODO: Send message
-                      res.send('You are now Logged in!');
-                    }
-                    else {
-                      // TODO: Send message
-                      res.send('Incorrect Login!');
-                    }
-                  }); 
+                // bcrypt.compare(req.body.password, hashedPassword, function(err, result) {
+                //     console.log(result);
+                //     if (err) {
+                //       // TODO: Handle error
+                //       return console.error(err.message);
+                //     }
+                //     else if (result == true) {
+                //       // TODO: Send message
+                //       res.send('You are now Logged in!');
+                //     }
+                //     else {
+                //       // TODO: Send message
+                //       res.send('Incorrect Login!');
+                //     }
+                //   }); 
             }
             else {
-                
+                res.send('Login not detected, register with us first.');
             }
-        });      
+        });   
+            bcrypt.compare(req.body.password, hashedPassword, function(err, result) {
+                console.log(result);
+                if (err) {
+                // TODO: Handle error
+                return console.error(err.message);
+                }
+                else if (result == true) {
+                // TODO: Send message
+                res.send('You are now Logged in!');
+                }
+                else {
+                // TODO: Send message
+                res.send('Incorrect Login!');
+                }
+            });   
     })
     
 
