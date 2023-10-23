@@ -53,7 +53,7 @@ module.exports = function(app, shopData) {
             if (err){
                 return console.error(err.message);
             }
-            else {
+            else if (result == true) {
                 bcrypt.compare(req.body.password, hashedPassword, function(err, result) {
                     if (err) {
                       // TODO: Handle error
@@ -66,6 +66,9 @@ module.exports = function(app, shopData) {
                       // TODO: Send message
                     }
                   }); 
+            }
+            else {
+                
             }
         });      
     })
