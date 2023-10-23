@@ -57,7 +57,7 @@ module.exports = function(app, shopData) {
             else {
                 const hashedPassword = result;
                 bcrypt.compare(req.body.password, hashedPassword, function(err, result) {
-                    console.log(result);
+                    // console.log(result);
                     if (err) {
                       // TODO: Handle error
                       return console.error(err.message);
