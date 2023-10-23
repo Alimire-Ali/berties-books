@@ -45,19 +45,17 @@ module.exports = function(app, shopData) {
         res.render('login.ejs', shopData);                                                                     
     });
     app.post('/loggedin', function (req,res) {
-        // const bcrypt = require('bcrypt');
-        // const plainPassword = req.body.password;
+        const bcrypt = require('bcrypt');
+
         let sqlquery = "SELECT hashedPassword FROM registration WHERE username = ? ";
         let lgdetails = [req.body.username];
-        db.query(sqlquery,lgdetails, (err, result)=> {
+        db.query(sqlquery, lgdetails, (err, result) => {
             console.log(result);
             if (err){
                 return console.error(err.message);
             }
-            else {
-                const bcrypt = require('bcrypt');
-                const plainPassword = req.body.password;
-                bcrypt.compare(plainPassword, hashedPassword, function(err, result) {
+            else if (result == true) {
+                bcrypt.compare(req.body.password, hashedPassword, function(err, result) {
                     console.log(result);
                     if (err) {
                       // TODO: Handle error
@@ -73,11 +71,11 @@ module.exports = function(app, shopData) {
                     }
                   }); 
             }
-            // else {
-            //     res.send('Login not detected, register with us first.')
-            // }
+            else {
+                res.send('Login not detected, register with us first.')
+            }
         });      
-    })
+    });
     
 
     app.get('/list', function(req, res) {
