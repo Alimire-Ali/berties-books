@@ -51,7 +51,7 @@ module.exports = function(app, shopData) {
         let lgdetails = [req.body.username];
         db.query(sqlquery, lgdetails, (err, result) => {
             console.log(result);
-            console.log(hashedPassword);
+            console.log({hashedPassword});
             if (err){
                 return console.error(err.message);
             }
