@@ -45,8 +45,8 @@ module.exports = function(app, shopData) {
         res.render('login.ejs', shopData);                                                                     
     });
     app.post('/loggedin', function (req,res) {
-        const bcrypt = require('bcrypt');
-        const plainPassword = req.body.password;
+        // const bcrypt = require('bcrypt');
+        // const plainPassword = req.body.password;
         let sqlquery = "SELECT hashedPassword FROM registration WHERE username = ? ";
         let lgdetails = [req.body.username];
         db.query(sqlquery,lgdetails, (err, result)=> {
@@ -55,6 +55,8 @@ module.exports = function(app, shopData) {
                 return console.error(err.message);
             }
             else if (result == true) {
+                const bcrypt = require('bcrypt');
+                const plainPassword = req.body.password;
                 bcrypt.compare(plainPassword, hashedPassword, function(err, result) {
                     console.log(result);
                     if (err) {
