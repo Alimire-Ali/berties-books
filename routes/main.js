@@ -61,6 +61,7 @@ module.exports = function(app, shopData) {
                     }
                     else if (result == true) {
                       // TODO: Send message
+                      res.send('You are now Logged in!');
                     }
                     else {
                       // TODO: Send message
